@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Weapons</title>
+</head>
+
+<style>
+:root{
+  --bg:#111823;
+  --accent:#e61b3c;
+  --text:#fff;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #0b1020 0%, #171f33 45%, #2b1338 100%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(230,27,60,.18), transparent 35%),
+  radial-gradient(circle at bottom right, rgba(84,112,255,.16), transparent 30%);
+  pointer-events: none;
+  z-index: -1;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  text-align: center;
+  background: rgba(17,24,35,.95);
+  border: 2px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+table, th, td {
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+th, td {
+  padding: 12px;
+  vertical-align: middle;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+th:hover, td:hover {
+  background-color: rgba(255,255,255,.08);
+  transform: scale(1.01);
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+
+
+/* CLICKABLE WEAPON NAME */
+
+.weapon-name {
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.weapon-name:hover {
+  background-color: rgba(255,70,85,.15);
+  color: #ff4655;
+}
+
+
+/* HIDE IMAGE AND DESCRIPTION */
+
+.weapon-details {
+  display: none;
+}
+
+
+/* SHOW IMAGE AND DESCRIPTION */
+
+.weapon-details.show {
+  display: table-cell;
+}
+
+
+/* ANIMATION */
+
+.weapon-details.show {
+  animation: weaponAppear 0.3s ease;
+}
+
+@keyframes weaponAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
+<body>
+
+    <a class="back-button" href="./Weapon.html">
+        ← Back to Weapons
+    </a>
+
+    <table>
+
+        <tr>
+            <th>NAME</th>
+            <th>WEAPONS</th>
+            <th>DESCRIPTION</th>
+        </tr>
+
+
+        <!-- MELEE -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Melee
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/8/8f/Melee.png/revision/latest?cb=20230711201118"
+                    width="300"
+                    alt="Melee"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Melee is a base melee weapon provided to every
+                player, and cannot be dropped.
+
+                <br><br>
+
+                It has two modes of fire: one being a fast slashing
+                motion, and the other being a sharp jab.
+
+                <br><br>
+
+                The primary slash has a three swing combo that loops,
+                while the alternate slash deals more damage in a single
+                strike but with a longer recovery and slightly smaller
+                range and hitbox.
+
+                <br><br>
+
+                The weapon also deals double damage when striking
+                the target's back.
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <script>
+
+        function toggleWeapon(element) {
+
+            // Get the row that was clicked
+            let row = element.parentElement;
+
+            // Get the image and description
+            let details =
+                row.querySelectorAll(".weapon-details");
+
+            // Check if the weapon is already open
+            let isOpen =
+                details[0].classList.contains("show");
+
+
+            // Close all weapon details
+            document
+                .querySelectorAll(".weapon-details")
+                .forEach(function(detail) {
+
+                    detail.classList.remove("show");
+
+                });
+
+
+            // Open the selected weapon
+            if (!isOpen) {
+
+                details.forEach(function(detail) {
+
+                    detail.classList.add("show");
+
+                });
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Maps</title>
+
+    <style>
+        :root {
+            --bg: #111823;
+            --accent: #ff4655;
+            --text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 80px 20px 40px;
+            background: linear-gradient(
+                135deg,
+                #0b1020 0%,
+                #171f33 45%,
+                #2b1338 100%
+            );
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(230, 27, 60, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(84, 112, 255, 0.16),
+                    transparent 30%
+                );
+            pointer-events: none;
+            z-index: -1;
+            animation: drift 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 25px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 70, 85, 0.5);
+        }
+
+        /* BACK BUTTON */
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 10px;
+            transition: 0.2s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 70, 85, 0.3);
+            border-color: #ff4655;
+            transform: translateY(-2px);
+        }
+
+        /* SEARCH BAR */
+
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        #searchBar {
+            width: 350px;
+            max-width: 90%;
+            padding: 12px 18px;
+            font-size: 16px;
+            color: #ffffff;
+            background: #1f2937;
+            border: 2px solid #ff4655;
+            border-radius: 30px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        #searchBar::placeholder {
+            color: #bdbdbd;
+        }
+
+        #searchBar:focus {
+            box-shadow: 0 0 15px rgba(255, 70, 85, 0.7);
+            transform: scale(1.02);
+        }
+
+        /* TABLE */
+
+        table {
+            width: 100%;
+            max-width: 1100px;
+            margin: 30px auto;
+            border-collapse: collapse;
+            text-align: center;
+            background: rgba(17, 24, 35, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #111823 ;
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        /* CLICKABLE MAP NAME */
+
+        .map-name {
+            cursor: pointer;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 20px;
+            min-width: 130px;
+            transition: 0.25s ease;
+            user-select: none;
+        }
+
+        .map-name:hover {
+            color: #000000;
+            background: rgba(255, 70, 85, 0.2);
+            text-shadow: 0 0 10px #ff4655;
+        }
+
+        .map-name::after {
+            content: " ▼";
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* HIDDEN DETAILS */
+
+        .map-details {
+            display: none;
+        }
+
+        /* SHOW DETAILS */
+
+        .map-details.show {
+            display: table-cell;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MAP IMAGE */
+
+        .map-details img {
+            display: block;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 70, 85, 0.5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: 0.3s ease;
+        }
+
+        .map-details img:hover {
+            transform: scale(1.04);
+            border-color: #ff4655;
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.5);
+        }
+
+        /* DESCRIPTION */
+
+        .description {
+            line-height: 1.6;
+            color: #dddddd;
+            text-align: left;
+            max-width: 450px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 75px 10px 30px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+
+            .map-details img {
+                width: 160px;
+                height: 160px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .back-button {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .map-details img {
+                width: 130px;
+                height: 130px;
+            }
+        }
+        .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px}
+.brand:hover{background:rgba(230,27,60,.06)}
+.brand:active{transform:none}
+.brand:focus{outline:2px solid rgba(230,27,60,.18);outline-offset:2px}
+.brand .logo{width:100px;height:auto;display:inline-flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.brand .brand-text{font-size:1.1rem;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+    </style>
+</head>
+
+<body>
+
+    <a class="back-button" href="./index.html">
+        ← Back to Home
+    </a>
+
+    <div class="map-container">
+
+        <span class="brand"><span class="logo"><img src="https://www.pngall.com/wp-content/uploads/13/Valorant-Logo-PNG-File.png" alt="Valorant logo"></span><span class="brand-text">VALORANT MAPS</span></span>
+        <!-- SEARCH BAR -->
+
+        <div class="search-container">
+            <input
+                type="text"
+                id="searchBar"
+                placeholder="🔍 Search a Valorant map..."
+                onkeyup="searchMaps()"
+            >
+        </div>
+
+        <!-- MAP TABLE -->
+
+        <table>
+
+            <tr>
+                <th>NAME</th>
+                <th>MAP</th>
+                <th>DESCRIPTION</th>
+            </tr>
+
+            <!-- SUMMIT -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Summit
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/36a3f67d05cd359fa6c3a4c1fea3ba6ed84cbc2e-515x515.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Summit map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Climb onto Summit: home to the most advanced Radiant
+                    training academy in all of China. Maximize your strategic
+                    potential in a map with massive, droppable walls that
+                    change the layout of the battlefield for an entire round.
+                </td>
+            </tr>
+
+            <!-- CORRODE -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Corrode
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/90666c45369269a33eebddc363b250dbc7d61a34-515x515.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Corrode map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    A French castle town turned radianite salt mining
+                    facility. Siege your way through medieval streets,
+                    exploiting repurposed industrial machinery to battle
+                    across layered defenses in this traditional three lane
+                    map.
+                </td>
+            </tr>
+
+            <!-- ABYSS -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Abyss
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/ffa08e5d943b92543bf8110ab07d921f6e6c1eb5-515x515.png?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Abyss map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Gaze into the Abyss, a clandestine base buried deep
+                    within an impenetrable and endless chasm. Utilize death
+                    drops for clever new utility plays or to invite your
+                    enemies to take a plunge. High risk can grant high
+                    rewards—you just gotta nail the execution.
+                </td>
+            </tr>
+
+            <!-- SUNSET -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Sunset
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/699c33a4ee5f5daf71e87c0f3bf6ddf6995b4bb3-2000x2000.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=1781"
+                        alt="Sunset map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    A disaster at a local kingdom facility threatens to
+                    engulf the whole neighborhood. Stop at your favorite
+                    food truck then fight across the city in this traditional
+                    three lane map.
+                </td>
+            </tr>
+
+            <!-- LOTUS -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Lotus
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/a660e638ac2a27d458ef22a6db17b3e372137d09-1873x1873.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=1781"
+                        alt="Lotus map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    A mysterious structure housing an astral conduit radiates
+                    with ancient power. Great stone doors provide a variety
+                    of movement opportunities and unlock the paths to three
+                    mysterious sites.
+                </td>
+            </tr>
+
+            <!-- PEARL -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Pearl
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0c05fb9a4aa08553afb85842f91fad6f9d3fe87e-515x515.png?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Pearl map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Attackers push down into the Defenders on this two-site
+                    map set in a vibrant, underwater city. Pearl is a
+                    geo-driven map with no mechanics. Take the fight through
+                    a compact mid or the longer range wings in our first map
+                    set in Omega Earth.
+                </td>
+            </tr>
+
+            <!-- FRACTURE -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Fracture
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d7916de5399e878e06bc20bb4a36f5b8a8637050-515x515.webp?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Fracture map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    A top secret research facility split apart by a failed
+                    radianite experiment. With defender options as divided
+                    as the map, the choice is yours: meet the attackers on
+                    their own turf or batten down the hatches to weather
+                    the assault.
+                </td>
+            </tr>
+
+            <!-- BREEZE -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Breeze
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/5e9322e5270fea63d82e956ba7d4ccffe95eb84a-515x515.png?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Breeze map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Take in the sights of historic ruins or seaside caves on
+                    this tropical paradise. But bring some cover. You'll need
+                    them for the wide open spaces and long range engagements.
+                    Watch your flanks and this will be a Breeze.
+                </td>
+            </tr>
+
+            <!-- ICEBOX -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Icebox
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/421063d481e9e1b2b5f2f834f53b7512f77413b9-2000x2000.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=1781"
+                        alt="Icebox map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Your next battleground is a secret Kingdom excavation
+                    site overtaken by the arctic. The two plant sites
+                    protected by snow and metal require some horizontal
+                    finesse. Take advantage of the ziplines and they will
+                    never see you coming.
+                </td>
+            </tr>
+
+            <!-- ASCENT -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Ascent
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/a31ef0d024e1add0214eb49698ca13e58f62d17e-641x641.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=641"
+                        alt="Ascent map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    An open playground for small wars of position and
+                    attrition divide two sites on Ascent. Each site can be
+                    fortified by irreversible bomb doors; once they are down,
+                    you will have to destroy them or find another way.
+                    Yield as little territory as possible.
+                </td>
+            </tr>
+
+            <!-- SPLIT -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Split
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/dc8a607601339a6c79c8d144c93e17915cde8ac9-515x513.jpg?accountingTag=VAL&auto=format&fit=fill&q=80&w=515"
+                        alt="Split map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    If you want to go far, you will have to go up. A pair of
+                    sites split by an elevated center allows for rapid
+                    movement using two rope ascenders. Each site is built
+                    with a looming tower vital for control. Remember to
+                    watch above before it all blows sky-high.
+                </td>
+            </tr>
+
+            <!-- HAVEN -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Haven
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d9f3c040be38a8fc1f49f18d1221680419877c05-641x641.png?accountingTag=VAL&auto=format&fit=fill&q=80&w=641"
+                        alt="Haven map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Beneath a forgotten monastery, a clamour emerges from
+                    rival Agents clashing to control three sites. There is
+                    more territory to control, but defenders can use the
+                    extra real estate for aggressive pushes.
+                </td>
+            </tr>
+
+            <!-- BIND -->
+
+            <tr>
+                <td
+                    class="map-name"
+                    onclick="toggleMap(this)"
+                >
+                    Bind
+                </td>
+
+                <td class="map-details">
+                    <img
+                        src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/9c2f75aa4d00022c440615ce08988c7dd5f2bb00-641x641.png?accountingTag=VAL&auto=format&fit=fill&q=80&w=641"
+                        alt="Bind map"
+                    >
+                </td>
+
+                <td class="map-details description">
+                    Two sites. No middle. Gotta pick left or right. What is
+                    it going to be then? Both offer direct paths for attackers
+                    and a pair of one-way teleporters make it easier to flank.
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <script>
+
+        /* ==============================
+           CLICK MAP NAME
+        ============================== */
+
+        function toggleMap(element) {
+
+            // Get the row that was clicked
+            let row = element.parentElement;
+
+            // Get image and description cells
+            let details = row.querySelectorAll(".map-details");
+
+            // Check if this map is already open
+            let isOpen = details[0].classList.contains("show");
+
+            // Close every other map
+            document.querySelectorAll(".map-details").forEach(function(detail) {
+                detail.classList.remove("show");
+            });
+
+            // Open the selected map
+            if (!isOpen) {
+                details.forEach(function(detail) {
+                    detail.classList.add("show");
+                });
+            }
+        }
+
+
+        /* ==============================
+           SEARCH MAPS
+        ============================== */
+
+        function searchMaps() {
+
+            let input = document
+                .getElementById("searchBar")
+                .value
+                .toUpperCase();
+
+            let rows = document.querySelectorAll("table tr");
+
+            rows.forEach(function(row, index) {
+
+                // Skip table header
+                if (index === 0) {
+                    return;
+                }
+
+                let firstCell = row.querySelector(".map-name");
+
+                if (firstCell) {
+
+                    let mapName =
+                        firstCell.textContent.toUpperCase();
+
+                    if (mapName.includes(input)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>

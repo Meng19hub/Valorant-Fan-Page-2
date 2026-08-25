@@ -1,0 +1,98 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#ff4655;
+    padding:20px 50px;
+}
+
+header h1{
+    font-size:32px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:black;
+}
+
+.hero{
+    height:70vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWQzcHkwZTlqeTBsdWxvdHl1azk4dGZ5MGVwMjUyZWl6ODV3aXJ2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/BOrP8wAO0OJZDQdaEH/giphy.gif");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero h2{
+    font-size:60px;
+}
+
+.hero p{
+    margin:20px;
+    font-size:20px;
+}
+
+.hero button{
+    padding:12px 30px;
+    border:none;
+    background:#ff4655;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.hero button:hover{
+    background:white;
+    color:#ff4655;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:60px;
+}
+
+.card{
+    background:#222;
+    width:250px;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    background:#ff4655;
+}
+
+footer{
+    background:#1b1b1b;
+    text-align:center;
+    padding:20px;
+}

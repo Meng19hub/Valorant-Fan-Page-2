@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Weapons</title>
+</head>
+
+<style>
+:root{
+  --bg:#111823;
+  --accent:#e61b3c;
+  --text:#fff;
+}
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #0b1020 0%, #171f33 45%, #2b1338 100%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(230,27,60,.18), transparent 35%),
+  radial-gradient(circle at bottom right, rgba(84,112,255,.16), transparent 30%);
+  pointer-events: none;
+  z-index: -1;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  text-align: center;
+  background: rgba(17,24,35,.95);
+  border: 2px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+table, th, td {
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+th, td {
+  padding: 12px;
+  vertical-align: middle;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+th:hover, td:hover {
+  background-color: rgba(255,255,255,.08);
+  transform: scale(1.01);
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+
+
+/* CLICKABLE WEAPON NAME */
+
+.weapon-name {
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.weapon-name:hover {
+  background-color: rgba(255,70,85,.15);
+  color: #ff4655;
+}
+
+
+/* HIDE WEAPON IMAGE AND DESCRIPTION */
+
+.weapon-details {
+  display: none;
+}
+
+
+/* SHOW WEAPON IMAGE AND DESCRIPTION */
+
+.weapon-details.show {
+  display: table-cell;
+}
+
+
+/* ANIMATION */
+
+.weapon-details.show {
+  animation: weaponAppear 0.3s ease;
+}
+
+@keyframes weaponAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
+<body>
+
+    <a class="back-button" href="./Weapon.html">
+        ← Back to Weapons
+    </a>
+
+
+    <table>
+
+        <tr>
+            <th>NAME</th>
+            <th>WEAPONS</th>
+            <th>DESCRIPTION</th>
+        </tr>
+
+
+        <!-- ARES -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Ares
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/0/05/Ares.png/revision/latest?cb=20230711205253"
+                    width="300"
+                    alt="Ares"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Ares is a medium-cost machine gun.
+                Unlike most other guns that gets less accurate
+                as you continuously fire more bullets from them,
+                the Ares is the only gun in the game that gets
+                more accurate as it is continuously fired.
+
+                <br><br>
+
+                As a machine gun, it is most effective as either
+                a defensive tool to hold a site or when used to
+                get wallbang kills due to its high penetration,
+                rate of fire, and magazine capacity.
+
+                <br><br>
+
+                Their lower mobility and longer equip speeds,
+                however, make them less suited for peeking or
+                entering sites, something better served by SMGs
+                at the price of an Ares.
+
+            </td>
+
+        </tr>
+
+
+        <!-- ODIN -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Odin
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/5/58/Odin.png/revision/latest?cb=20230711205301"
+                    width="300"
+                    alt="Odin"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Odin is a high-cost machine gun.
+
+                <br><br>
+
+                When using Primary Fire, the Odin's fire rate
+                will increase over the duration the weapon is
+                fired to a maximum amount.
+
+                <br><br>
+
+                However, using Alternate Fire will allow the
+                user to shoot at that maximum fire rate immediately.
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <script>
+
+        function toggleWeapon(element) {
+
+            // Get the row that was clicked
+            let row = element.parentElement;
+
+            // Get the image and description
+            let details =
+                row.querySelectorAll(".weapon-details");
+
+            // Check if this weapon is already open
+            let isOpen =
+                details[0].classList.contains("show");
+
+
+            // Close all weapon details
+            document
+                .querySelectorAll(".weapon-details")
+                .forEach(function(detail) {
+
+                    detail.classList.remove("show");
+
+                });
+
+
+            // Open the selected weapon
+            if (!isOpen) {
+
+                details.forEach(function(detail) {
+
+                    detail.classList.add("show");
+
+                });
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

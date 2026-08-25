@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALORANT</title>
+
+    <style>
+
+
+body{
+    background:#0f1822;
+    color:#fff;
+    overflow:hidden;
+    min-height:100vh;
+    position:relative;
+}
+
+
+
+header{
+    width:90%;
+
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+
+nav a:hover,
+nav .active{
+    color:#ff4655;
+}
+
+.btn-fill:hover,
+.play-btn:hover{
+    transform:scale(1.05);
+}
+
+.hero{
+    width:90%;
+    margin:auto;
+    height:calc(100vh - 80px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.left h1{
+    font-size:90px;
+    font-weight:900;
+    line-height:1;
+}
+
+.play-btn{
+    margin-top:30px;
+    background:#ff4655;
+    color:white;
+    border:none;
+    padding:15px 40px;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+}
+
+
+.social{
+    position:absolute;
+    right:30px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.social a{
+    color:white;
+    font-size:22px;
+    transition:.3s;
+}
+
+.social a:hover{
+    color:#ff4655;
+    transform:translateY(-5px);
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@media(max-width:768px){
+
+    body{
+        overflow:auto;
+    }
+
+    header{
+        flex-direction:column;
+        height:auto;
+        padding:20px;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        height:auto;
+        padding:40px 0;
+    }
+
+    .left,
+    .right{
+        width:100%;
+    }
+
+    .left h1{
+        font-size:55px;
+    }
+
+    .right img{
+        width:70%;
+        margin-top:30px;
+    }
+
+    .social{
+        position:relative;
+        flex-direction:row;
+        justify-content:center;
+        margin:30px 0;
+        right:0;
+        top:0;
+        transform:none;
+    }
+
+    .background-shape{
+        width:100%;
+        height:35%;
+        top:auto;
+        bottom:0;
+    }
+    
+
+}
+ :root{--bg:#111823;--accent:#e61b3c;--text:#fff}
+    body{margin:0;font:16px/1 Arial,sans-serif;color:var(--text);min-height:100vh;background:url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHVjYWp5cTM0bnZ1emg0ajJycGM3cjF1NXIwMjk2c3MxdHFrN3FzMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WqNmbi4La3IJg9PhcR/giphy.gif) center/cover no-repeat;position:relative;overflow:hidden}
+    body::before{content:"";position:fixed;inset:0;background:rgba(5,8,15,.55);pointer-events:none;z-index:-1}
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:20px auto;border:2px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(17,24,35,.95);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+
+
+
+    </style>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <a class="back-button" href="./index.html">← Back to Home</a>
+
+<header>
+
+    <div class="logo">
+        <h2></h2>
+    </div>
+
+    <nav>
+        <a href="#" class="active">HOME</a>
+
+</header>
+
+<section class="hero">
+
+    <div class="left">
+
+        <p class="subtitle">
+            A 5V5 CHARACTER-BASED <br>
+            TACTICAL SHOOTER
+        </p>
+
+        <h1>
+            VALORANT
+        </h1>
+
+        <button class="play-btn">
+            PLAY NOW
+        </button>
+
+    </div>
+
+    <div class="right">
+
+
+    </div>
+
+</section>
+
+<div class="social">
+
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+
+</div>
+
+<div class="background-shape"></div>
+
+
+
+<script>
+    // Smooth button animation
+const playBtn = document.querySelector(".play-btn");
+
+playBtn.addEventListener("click", () => {
+
+    playBtn.innerHTML = "LOADING...";
+
+    playBtn.style.background = "#ffffff";
+    playBtn.style.color = "#ff4655";
+
+    setTimeout(() => {
+        playBtn.innerHTML = "PLAY NOW";
+        playBtn.style.background = "#ff4655";
+        playBtn.style.color = "#ffffff";
+    }, 1500);
+
+});
+
+</script>
+
+
+</body>
+</html>

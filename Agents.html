@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VALORANT Agents</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #07131d;
+            color: white;
+            font-family: Arial;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            background: #101d27;
+            border-bottom: 3px solid #ff4655;
+        }
+
+        h1 {
+            margin: 0;
+            color: #ff4655;
+            letter-spacing: 4px;
+        }
+
+        p {
+            color: #aaa;
+        }
+
+        #agents {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background: #10212d;
+            border: 1px solid #263b48;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4655;
+        }
+
+        img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            background: #162b38;
+        }
+
+        .info {
+            padding: 15px;
+        }
+
+        h2 {
+            color: #ff4655;
+            margin: 0 0 8px;
+        }
+
+        .role {
+            color: #7ec8ff;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .description {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+            #agents {
+                grid-template-columns: 1fr;
+            }
+        }
+        .back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+    </style>
+</head>
+
+<body>
+    <a class="back-button" href="./index.html">← Back to Home</a>
+
+<header>
+    <h1>VALORANT // AGENTS</h1>
+    <p>Agent Database</p>
+</header>
+
+<div id="agents"></div>
+
+<script>
+
+fetch("https://valorant-api.com/v1/agents?isPlayableCharacter=true")
+.then(response => response.json())
+.then(data => {
+
+    data.data.forEach(agent => {
+
+        document.getElementById("agents").innerHTML += `
+        
+        <div class="card">
+
+            <img src="${agent.fullPortrait}">
+
+            <div class="info">
+                <h2>${agent.displayName}</h2>
+
+                <div class="role">
+                    ${agent.role.displayName}
+                </div>
+
+                <p class="description">
+                    ${agent.description}
+                </p>
+            </div>
+
+        </div>
+
+        `;
+    });
+
+});
+
+</script>
+
+</body>
+</html>

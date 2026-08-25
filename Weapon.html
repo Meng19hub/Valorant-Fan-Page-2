@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Weapons</title>
+</head>
+<style>
+:root{--bg:#111823;--accent:#e61b3c;--text:#fff}
+body{margin:0;font:16px/1 Arial,sans-serif;color:var(--text);min-height:100vh;background:url('https://i.redd.it/zyipc46j76r41.gif') center/cover no-repeat;position:relative;overflow:hidden}
+body::before{content:"";position:fixed;inset:0;background:rgba(5,8,15,.55);pointer-events:none;z-index:-1}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:20px auto;border:2px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(17,24,35,.95);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px}
+.brand:hover{background:rgba(230,27,60,.06)}
+.brand:active{transform:none}
+.brand:focus{outline:2px solid rgba(230,27,60,.18);outline-offset:2px}
+.brand .logo{width:100px;height:auto;display:inline-flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.brand .brand-text{font-size:1.1rem;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+
+.nav-links{list-style:none;margin:0;padding:0;display:flex;gap:14px}
+.nav-links a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:6px;transition:background .18s,transform .12s;cursor:pointer;display:inline-block}
+.nav-links a:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.nav-links a:focus{outline:2px solid rgba(255,255,255,.06);outline-offset:2px}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+</style>
+
+<body>
+    <a class="back-button" href="./index.html">← Back to Home</a>
+    
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <span class="brand"><span class="logo"><img src="https://www.pngall.com/wp-content/uploads/13/Valorant-Logo-PNG-File.png" alt="Valorant logo"></span><span class="brand-text">VALORANT WEAPONS</span></span>
+        <ul class="nav-links">
+            <li><a href="./Side Arms.html">Sidearms</a></li>
+            <li><a href="./SMGs.html">SMGs</a></li>
+            <li><a href="./Shotguns.html">Shotguns</a></li>
+            <li><a href="./Rifles.html">Rifles</a></li>
+            <li><a href="./Sniper Rifles.html">Sniper Rifles</a></li>
+            <li><a href="./Machine guns.html">Machine Guns</a></li>
+            <li><a href="./Melee.html">Melee</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

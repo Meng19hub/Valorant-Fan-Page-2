@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Weapons</title>
+</head>
+
+<style>
+:root{
+  --bg:#111823;
+  --accent:#e61b3c;
+  --text:#fff;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #0b1020 0%, #171f33 45%, #2b1338 100%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(230,27,60,.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(84,112,255,.16),
+      transparent 30%
+    );
+  pointer-events: none;
+  z-index: -1;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  text-align: center;
+  background: rgba(17,24,35,.95);
+  border: 2px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+table, th, td {
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+th, td {
+  padding: 12px;
+  vertical-align: middle;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+th:hover, td:hover {
+  background-color: rgba(255,255,255,.08);
+  transform: scale(1.01);
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.12);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 10px;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.back-button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
+}
+
+
+/* CLICKABLE WEAPON NAME */
+
+.weapon-name {
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.weapon-name:hover {
+  background-color: rgba(255,70,85,.15);
+  color: #ff4655;
+}
+
+
+/* HIDE IMAGE AND DESCRIPTION */
+
+.weapon-details {
+  display: none;
+}
+
+
+/* SHOW IMAGE AND DESCRIPTION */
+
+.weapon-details.show {
+  display: table-cell;
+}
+
+
+/* SIMPLE APPEAR ANIMATION */
+
+.weapon-details.show {
+  animation: weaponAppear 0.3s ease;
+}
+
+@keyframes weaponAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
+<body>
+
+    <a class="back-button" href="./Weapon.html">
+        ← Back to Weapons
+    </a>
+
+    <table>
+
+        <tr>
+            <th>NAME</th>
+            <th>WEAPONS</th>
+            <th>DESCRIPTION</th>
+        </tr>
+
+
+        <!-- CLASSIC -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Classic
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/5/57/Classic.png/revision/latest?cb=20230711205256"
+                    width="300"
+                    alt="Classic"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Classic is a pistol that all players receive
+                upon spawning. It has two firing modes, a standard
+                semi-automatic single-bullet primary fire and a
+                semi-automatic shotgun alternate fire that fires
+                three bullets instantly but only at around a third
+                of its usual fire rate.
+
+            </td>
+
+        </tr>
+
+
+        <!-- SHORTY -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Shorty
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/7/77/Shorty.png/revision/latest?cb=20230711205304"
+                    width="300"
+                    alt="Shorty"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Shorty is the cheapest purchasable weapon
+                in the game. As a sidearm equivalent of a shotgun,
+                it is most effective at short range to instantly
+                take an enemy by surprise.
+
+                With good damage and functionality despite its low
+                price tag, it can even be used to catch out a
+                fully-bought enemy in eco rounds, allowing the player
+                to gain a powerful weapon upgrade for very little
+                investment.
+
+            </td>
+
+        </tr>
+
+
+        <!-- FRENZY -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Frenzy
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/f/f1/Frenzy.png/revision/latest?cb=20230711205257"
+                    width="300"
+                    alt="Frenzy"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Frenzy is a low-cost automatic pistol.
+                As a sidearm equivalent of an SMG, it's not too
+                punishing to use on the move at short ranges,
+                making it most effective at that range and the
+                best sidearm to use in such scenarios.
+
+                Though to challenge enemies who have full-bought,
+                getting headshots will most likely be necessary.
+
+            </td>
+
+        </tr>
+
+
+        <!-- GHOST -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Ghost
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/a/ab/Ghost.png/revision/latest?cb=20230711205257"
+                    width="300"
+                    alt="Ghost"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Ghost is a low-cost semi-automatic pistol.
+                Equipped with a large magazine and a silencer,
+                it can be used to spam through vision blockers
+                without much risk to the player's ammo count
+                or positioning.
+
+            </td>
+
+        </tr>
+
+
+        <!-- BANDIT -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Bandit
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/1/1f/Bandit.png/revision/latest?cb=20260106171831"
+                    width="300"
+                    alt="Bandit"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Bandit is a semi-automatic pistol most effective
+                at short to medium ranges against enemies with light
+                armor, being able to deliver a lethal headshot with
+                one bullet.
+
+                At longer ranges, only enemies with broken or no armor
+                can fall to a single headshot but at closer ranges a
+                Bandit headshot will kill any enemy.
+
+                The Bandit isn't as spammable as the Ghost with its
+                lower fire rate and reserve but does have more power.
+
+                The costlier Sheriff is lethal in more situations but
+                the Bandit has a higher fire rate, equip speed, and
+                reload speed, as well as much less spread.
+
+            </td>
+
+        </tr>
+
+
+        <!-- SHERIFF -->
+
+        <tr>
+
+            <td
+                class="weapon-name"
+                onclick="toggleWeapon(this)"
+            >
+                Sheriff
+            </td>
+
+            <td class="weapon-details">
+
+                <img
+                    src="https://static.wikia.nocookie.net/valorant/images/3/3e/Sheriff.png/revision/latest?cb=20230711205303"
+                    width="300"
+                    alt="Sheriff"
+                >
+
+            </td>
+
+            <td class="weapon-details">
+
+                The Sheriff is a semi-automatic revolver and the
+                most expensive sidearm in the game.
+
+                Able to kill enemies with a single bullet to the
+                head at most ranges and health totals, it can be
+                used to challenge even enemies who have full-bought.
+
+                Its high penetration and extra reserve magazine also
+                makes it useful for spamming for wallbangs during
+                pistol or eco rounds.
+
+                With a low-capacity magazine and low fire rate,
+                however, even one missed shot can end up being
+                punishing.
+
+                The Sheriff's high recoil and spread also promotes
+                exceptional control and precision in order to use
+                it when fighting multiple enemies.
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <script>
+
+        function toggleWeapon(element) {
+
+            // Get the row that was clicked
+            let row = element.parentElement;
+
+            // Get the image and description cells
+            let details =
+                row.querySelectorAll(".weapon-details");
+
+            // Check if this weapon is already open
+            let isOpen =
+                details[0].classList.contains("show");
+
+
+            // Close all other weapons
+            document
+                .querySelectorAll(".weapon-details")
+                .forEach(function(detail) {
+
+                    detail.classList.remove("show");
+
+                });
+
+
+            // Open the selected weapon
+            if (!isOpen) {
+
+                details.forEach(function(detail) {
+
+                    detail.classList.add("show");
+
+                });
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
